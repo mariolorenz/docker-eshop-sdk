@@ -7,8 +7,7 @@ DocumentRoot "/var/www/"
 
 <VirtualHost _default_:443>
     DocumentRoot "/var/www/"
-    ServerName localhost.local
-    ServerAlias oxideshop.local
+    ServerName localhost:443
 
     SSLEngine on
     <Directory "/var/www/">
@@ -19,3 +18,7 @@ DocumentRoot "/var/www/"
     SSLCertificateFile "/usr/local/apache2/conf/server.crt"
     SSLCertificateKeyFile "/usr/local/apache2/conf/server.key"
 </VirtualHost>
+
+### Alias buchsuite_develop7 START
+Alias /buchsuite_develop7 "/var/www/buchsuite_develop7/source/"
+### Alias buchsuite_develop7 ENDE

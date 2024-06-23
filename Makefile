@@ -13,6 +13,7 @@ help:
 	        once before everything!\n\n\
 	    \e[1;1;32mmake addbasicservices\e[0m - Adds php, apache and mysql services \n\
 	    \e[1;1;32mmake file=... addservice\e[0m - Prepend file contents to current docker-compose.yml file\n\n\
+	    \e[1;1;32mmake install\e[0m - Install & Start all configured containers (have you run setup command already?)!\n\
 	    \e[1;1;32mmake up\e[0m - Start all configured containers (have you run setup command already?)!\n\
 	    \e[1;1;32mmake down\e[0m - Stop all configured containers\n\n\
 	    \e[1;1;32mmake example\e[0m - Setup basic services + Runs example recipe\n\n\
@@ -36,8 +37,11 @@ example:
 	@make addbasicservices
 	@./recipes/default/example/run.sh
 
-up:
+install:
 	docker compose up --build -d
+
+up:
+	docker compose up -d
 
 down:
 	docker compose down --remove-orphans
