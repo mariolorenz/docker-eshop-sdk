@@ -19,10 +19,6 @@ For the start:
 
 Additionally, check services directory:
 * Npm container preconfigured, so you can easily regenerate grunt/gulp/other builder assets for modules/themes easier (based on node:latest)
-* Chrome based selenium service available, for running your selenium tests (based on selenium/standalone-chrome-debug)
-* Elasticsearch (also kibana to manage it) containers preconfigured
-* NGINX container preconfigured to be used with our NGINX module
-* Sphinx container which allows you to regenerate and improve our documentations locally much easier
 
 ## Requirements
 
@@ -72,8 +68,8 @@ make setup
 # add php, mysql and apache services (they are grouped in one command, but can be added separately if needed)
 make addbasicservices
 
-# add selenium container to the docker-compose
-make file=services/selenium-chrome.yml addservice
+# add node container to the docker-compose
+make file=services/node.yml addservice
 
 # ensure you have source directory available, as its configured as webroot by default
 mkdir source
