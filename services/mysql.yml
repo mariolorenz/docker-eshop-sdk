@@ -11,6 +11,6 @@
       interval: 2s
       retries: 120
     volumes:
-      - ./data/mysql:/var/lib/mysql:delegated
+      - ./../workspace/data/mysql${MYSQL_VERSION}:/var/lib/mysql:delegated
     ports:
       - 3306:3306 # to access mysql with local client
