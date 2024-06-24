@@ -8,6 +8,7 @@ ARG HOST_GROUP_ID
 ARG HOST_GROUP_NAME
 
 RUN mkdir /var/www
+RUN mkdir /home/node/.npm-global
 
 RUN groupmod -g 1099 node \
   && usermod -u 1099 -g 1099 node
@@ -15,4 +16,8 @@ RUN groupmod -g 1099 node \
 RUN groupadd -f -g $HOST_GROUP_ID $HOST_GROUP_NAME && \
     useradd -m -d /home/$HOST_USER_NAME -s /bin/bash -g $HOST_GROUP_ID -u $HOST_USER_ID $HOST_USER_NAME || true && \
     echo "$HOST_USER_NAME  ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
-    chown -R $HOST_USER_NAME:$HOST_GROUP_NAME /var/www/
+    chown -R $HOST_USER_NAME:$HOST_GROUP_NAME /var/www/ && \
+    chown -R $HOST_USER_NAME:$HOST_GROUP_NAME /home/node/.npm-global
+
+ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
+ENV PATH=$PATH:/home/node/.npm-global/bin
