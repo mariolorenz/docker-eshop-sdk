@@ -11,3 +11,4 @@
     working_dir: /var/www
     volumes:
       - /home/blackbox/workspace/buchsuite:/var/www:cached
+      - /home/blackbox/workspace/npmglobal:/home/node/.npm-global:cached
