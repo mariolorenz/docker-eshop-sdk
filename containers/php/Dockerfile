@@ -23,7 +23,7 @@ RUN groupadd -f -g $HOST_GROUP_ID $HOST_GROUP_NAME && \
 RUN mkdir /home/$HOST_USER_NAME/.ssh && \
     ssh-keyscan -t rsa github.com >> /home/$HOST_USER_NAME/.ssh/known_hosts
 
-RUN apt-get update -y && \
-    docker-php-ext-install ftp
+RUN apt-get update && apt-get install -y libssl-dev && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-install ftp
 
 WORKDIR /var/www/
