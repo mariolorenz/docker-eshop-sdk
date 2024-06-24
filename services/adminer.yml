@@ -1,5 +1,5 @@
   adminer:
-    image: adminer
+    image: ghcr.io/shyim/adminerevo:latest
     restart: always
     environment:
       ADMINER_DEFAULT_SERVER: mysql
