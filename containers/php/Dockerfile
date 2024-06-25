@@ -12,6 +12,16 @@ ARG SMTP_PORT
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY custom.ini /usr/local/etc/php/conf.d/zcustom.ini
 
+# ionCube
+RUN cd /tmp \
+    && curl -o ioncube.tar.gz http://downloads3.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
+    && tar -xvvzf ioncube.tar.gz \
+    && MAJOR_PHP_VERSION=$(echo $PHP_VERSION | cut -d'.' -f1-2) \
+    && mv ioncube/ioncube_loader_lin_$MAJOR_PHP_VERSION.so /usr/local/lib/php/extensions/* \
+    && rm -Rf ioncube.tar.gz ioncube \
+    && PHP_EXTENSION_PATH=$(php-config --extension-dir) \
+    && echo "zend_extension=$PHP_EXTENSION_PATH/ioncube_loader_lin_$MAJOR_PHP_VERSION.so" > /usr/local/etc/php/conf.d/00_ioncube-ext.ini
+
 # set sendmail for php to ssmtp
 RUN printf "host mailpit\nport 1025" >> /etc/msmtprc
 
