@@ -36,7 +36,7 @@ RUN mkdir /home/$HOST_USER_NAME/.ssh && \
 RUN apt-get update && apt-get install -y libssl-dev && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install ftp
 
-# add composer global to bashrc
-RUN echo "export PATH=\"/home/$HOST_USER_NAME/.composer/vendor/bin:$PATH\"" >> ~\.bashrc
+# add composer global to PATH via .bashrc
+RUN echo "export PATH=\"~/.composer/vendor/bin:$PATH\"" >> /home/${HOST_USER_NAME}/.bashrc
 
 WORKDIR /var/www/

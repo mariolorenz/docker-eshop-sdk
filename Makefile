@@ -37,7 +37,7 @@ example:
 	@make addbasicservices
 	@./recipes/default/example/run.sh
 
-install:
+build:
 	docker compose up --build -d
 
 up:
