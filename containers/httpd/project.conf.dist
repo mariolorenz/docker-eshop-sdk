@@ -20,5 +20,6 @@ DocumentRoot "/var/www/"
 </VirtualHost>
 
 ### Alias buchsuite_develop7 START
+Alias /buchsuite_develop6 "/var/www/buchsuite_develop6/source/"
 Alias /buchsuite_develop7 "/var/www/buchsuite_develop7/source/"
 ### Alias buchsuite_develop7 ENDE
