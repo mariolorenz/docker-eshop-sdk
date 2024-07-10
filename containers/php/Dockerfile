@@ -30,8 +30,9 @@ RUN groupadd -f -g $HOST_GROUP_ID $HOST_GROUP_NAME && \
     echo "$HOST_USER_NAME  ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && \
     chown -R $HOST_USER_NAME:$HOST_GROUP_NAME /var/www/
 
-RUN mkdir /home/$HOST_USER_NAME/.ssh && \
-    ssh-keyscan -t rsa github.com >> /home/$HOST_USER_NAME/.ssh/known_hosts
+# add via mounted volume
+#RUN mkdir /home/$HOST_USER_NAME/.ssh && \
+#    ssh-keyscan -t rsa github.com >> /home/$HOST_USER_NAME/.ssh/known_hosts
 
 RUN apt-get update && apt-get install -y libssl-dev && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install ftp
