@@ -46,6 +46,9 @@ up:
 down:
 	docker compose down --remove-orphans
 
+stop:
+	docker compose stop
+
 php:
 	docker compose exec php bash
 
