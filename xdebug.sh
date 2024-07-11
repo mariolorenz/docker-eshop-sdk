@@ -9,6 +9,7 @@ if [[ -z "$1" ]]
 then
     echo "usage: xdebug on|off"
 else
+    docker compose down --remove-orphans
     if [[ "$1" == "on" ]]; then
         echo -e "turning xdebug ${GREEN}on${NO_COLOR}"
         sed -i 's/;*zend/zend/g' $XDEBUG_CONFIG_FILE
@@ -16,5 +17,5 @@ else
         echo -e "turning xdebug ${RED}off${NO_COLOR}"
         sed -i 's/;*zend/;zend/g' $XDEBUG_CONFIG_FILE
     fi
-    docker compose restart php
+    docker compose up -d
 fi
