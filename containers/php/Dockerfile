@@ -9,7 +9,6 @@ ARG HOST_GROUP_NAME
 ARG SMTP_HOST
 ARG SMTP_PORT
 
-COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY custom.ini /usr/local/etc/php/conf.d/zcustom.ini
 
 # ionCube
