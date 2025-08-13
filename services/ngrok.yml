@@ -1,0 +1,12 @@
+  ngrok:
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    command:
+      - "start"
+      - "workspace"
+      - "--config"
+      - "/etc/ngrok.yml"
+    volumes:
+      - ./../workspace/data/ngrok/ngrok.yml:/etc/ngrok.yml
+    ports:
+      - 4040:4040

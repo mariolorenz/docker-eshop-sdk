@@ -19,7 +19,20 @@ DocumentRoot "/var/www/"
     SSLCertificateKeyFile "/usr/local/apache2/conf/server.key"
 </VirtualHost>
 
-### Alias buchsuite_develop7 START
+### Alias buchsuite START
+Alias /buchsuite_artemis7 "/var/www/buchsuite_artemis7/source/"
+Alias /buchsuite_buchkomplizen6 "/var/www/buchsuite_buchkomplizen6/source/"
 Alias /buchsuite_develop6 "/var/www/buchsuite_develop6/source/"
 Alias /buchsuite_develop7 "/var/www/buchsuite_develop7/source/"
-### Alias buchsuite_develop7 ENDE
+Alias /buchsuite_fva6 "/var/www/buchsuite_fva6/source/"
+Alias /buchsuite_gerstenberg6 "/var/www/buchsuite_gerstenberg6/source/"
+Alias /buchsuite_ibidem6 "/var/www/buchsuite_ibidem6/source/"
+Alias /buchsuite_junius6 "/var/www/buchsuite_junius6/source/"
+Alias /buchsuite_moritz6 "/var/www/buchsuite_moritz6/source/"
+Alias /buchsuite_nurgutebuecher6 "/var/www/buchsuite_nurgutebuecher6/source/"
+Alias /buchsuite_richter6 "/var/www/buchsuite_richter6/source/"
+Alias /buchsuite_steinsche_checkout6 "/var/www/buchsuite_steinsche_checkout6/source/"
+Alias /buchsuite_velbrueck6 "/var/www/buchsuite_velbrueck6/source/"
+Alias /buchsuite_wienand6 "/var/www/buchsuite_wienand6/source/"
+Alias /buchsuite_wachholtz6 "/var/www/buchsuite_wachholtz6/source/"
+### Alias buchsuite ENDE

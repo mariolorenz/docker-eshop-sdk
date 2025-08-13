@@ -12,6 +12,7 @@ help:
 	        and prepares all modifiable custom files from dist. Run this \n\
 	        once before everything!\n\n\
 	    \e[1;1;32mmake addbasicservices\e[0m - Adds php, apache and mysql services \n\
+	    \e[1;1;32mmake addngrokservice\e[0m - Adds ngrok and dnsmasq services \n\
 	    \e[1;1;32mmake file=... addservice\e[0m - Prepend file contents to current docker-compose.yml file\n\n\
 	    \e[1;1;32mmake install\e[0m - Install & Start all configured containers (have you run setup command already?)!\n\
 	    \e[1;1;32mmake up\e[0m - Start all configured containers (have you run setup command already?)!\n\
@@ -58,6 +59,9 @@ generate-docs:
 node:
 	docker compose run --rm node bash
 
+ngrok:
+	docker compose run --rm ngrok start workspace --config /etc/ngrok.yml
+
 addservice:
 	@cat $(file) >> docker-compose.yml
 	@printf "\n" >> docker-compose.yml
@@ -70,9 +74,9 @@ addbasicservices:
 	@make file=services/mysql.yml addservice
 	@printf "php, apache and mysql related services added\n";
 
-addsphinxservice:
-	@printf "\nDOC_PATH=$(docpath)" >> .env
-	@make file=services/sphinx.yml addservice
+addngrokservice:
+	@make file=services/ngrok.yml addservice
+	@make file=services/caddy.yml addservice
 
 cleanup:
 	-make down
@@ -83,3 +87,28 @@ cleanup:
 	-[ -e "containers/php/custom.ini" ] && rm containers/php/custom.ini
 	-[ -d "data/mysql" ] && rm -rf data/mysql/*
 	-[ -d "data/composer/cache" ] && rm -rf data/composer/cache
+
+mysqlimport:
+	@if [ -z "$(filter-out $@,$(MAKECMDGOALS))" ]; then \
+		echo "Usage: make mysqlimport /path/to/dump.sql (filename = target database name)"; \
+		exit 1; \
+	fi
+	$(eval DUMP_FILE := $(filter-out $@,$(MAKECMDGOALS)))
+	$(eval DB_NAME := $(basename $(notdir $(DUMP_FILE))))
+	@echo "=== MySQL Import ==="
+	@echo "File: $(DUMP_FILE)"
+	@echo "Target Database: $(DB_NAME) (derived from filename)"
+	@if [ ! -f "$(DUMP_FILE)" ]; then \
+		echo "Error: File $(DUMP_FILE) not found"; \
+		exit 1; \
+	fi
+	@echo "File size: $$(du -h $(DUMP_FILE) | cut -f1)"
+	docker-compose exec -T mysql mysql -uroot -proot -v $(DB_NAME) < $(filter-out $@,$(MAKECMDGOALS));
+	@echo "Import completed successfully"
+
+mysql:
+	docker-compose exec mysql mysql -uroot -proot
+
+# Dummy target to avoid make errors
+%:
+	@true

@@ -1,0 +1,7 @@
+tunnels:
+    workspace:
+        proto: http
+        addr: apache:443
+        domain: XXXXX
+authtoken: YYYYY
+version: "2"
